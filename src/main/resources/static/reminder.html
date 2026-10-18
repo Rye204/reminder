@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Nhắc việc</title>
+  <link rel="stylesheet" href="css/reminder.css">
+</head>
+<body>
+  <header class="top">
+    <div>
+      <h1>Nhắc việc</h1>
+      <p class="sub">Đặt giờ nhắc cho từng task. Đến giờ, trình duyệt sẽ báo cho bạn.</p>
+    </div>
+    <div class="top-actions">
+      <span id="conn" class="conn" data-state="connecting">
+        <span class="dot" aria-hidden="true"></span>
+        <span id="conn-text">Đang kết nối</span>
+      </span>
+      <button id="perm-btn" class="btn ghost" type="button" hidden>Bật thông báo trình duyệt</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="panel form-panel" aria-labelledby="form-title">
+      <h2 id="form-title">Đặt nhắc mới</h2>
+      <form id="reminder-form" novalidate>
+        <div class="field">
+          <label for="task-id">ID task</label>
+          <input id="task-id" type="number" min="1" step="1" inputmode="numeric" required>
+        </div>
+        <div class="field">
+          <label for="remind-at">Giờ nhắc</label>
+          <input id="remind-at" type="datetime-local" required>
+          <p class="hint" id="form-hint">Chọn một thời điểm trong tương lai.</p>
+        </div>
+        <p id="form-error" class="error" role="alert"></p>
+        <div class="actions">
+          <button type="submit" id="submit-btn" class="btn primary">Đặt nhắc</button>
+          <button type="button" id="cancel-edit-btn" class="btn ghost" hidden>Bỏ sửa</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="list-panel" aria-labelledby="list-title">
+      <div class="list-head">
+        <h2 id="list-title">Danh sách nhắc</h2>
+        <div class="filter-task">
+          <label for="task-filter">Lọc theo ID task</label>
+          <input id="task-filter" type="number" min="1" step="1" inputmode="numeric" placeholder="Tất cả">
+        </div>
+      </div>
+
+      <div id="tabs" class="tabs" role="group" aria-label="Lọc theo trạng thái">
+        <button type="button" data-filter="all" aria-pressed="true">Tất cả</button>
+        <button type="button" data-filter="pending" aria-pressed="false">Đang chờ</button>
+        <button type="button" data-filter="sent" aria-pressed="false">Đã gửi</button>
+        <button type="button" data-filter="cancelled" aria-pressed="false">Đã hủy</button>
+      </div>
+
+      <ul id="list" class="list"></ul>
+      <p id="empty" class="empty" hidden></p>
+    </section>
+  </main>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <script src="js/reminder.js"></script>
+</body>
+</html>
